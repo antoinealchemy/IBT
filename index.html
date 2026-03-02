@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBTimus - Entreprise Générale de Bâtiment en Île-de-France</title>
+    <meta name="description" content="IBTimus, entreprise générale de bâtiment en Île-de-France depuis 2005. Ravalement, isolation thermique, construction, rénovation, agencement. Devis gratuit.">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Top Bar */
+        .top-bar {
+            background: linear-gradient(135deg, #C9A84C 0%, #D4B85E 50%, #C9A84C 100%);
+            color: #0A0A0A;
+            text-align: center;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+        }
+
+        .top-bar span {
+            color: #0A0A0A;
+        }
+
+        .header {
+            top: 33px !important;
+        }
+
+        /* Hero Section style blueprint */
+        .hero-section {
+            background-color: #1a365d;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            padding: 100px 0 80px;
+            margin-top: 113px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content h1 span {
+            color: #C9A84C;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Hero slider */
+        .hero-slider-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .hero-slider-track {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .hero-slide {
+            min-width: 100%;
+            height: 350px;
+        }
+
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .hero-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hero-dot.active {
+            background: #C9A84C;
+        }
+
+        /* Bandeau doré */
+        .gold-banner {
+            background: linear-gradient(135deg, #C9A84C 0%, #D4B85E 50%, #C9A84C 100%);
+            color: #0A0A0A;
+            text-align: center;
+            padding: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .gold-banner svg {
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        /* Prestations avec images */
+        .prestations {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .prestations-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .prestation-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .prestation-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .prestation-card-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .prestation-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .prestation-card:hover .prestation-card-image img {
+            transform: scale(1.1);
+        }
+
+        .prestation-card-content {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .prestation-card-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0A0A0A;
+            margin-bottom: 10px;
+        }
+
+        .prestation-card-content p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .btn-voir-plus {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #C9A84C;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .prestation-card:hover .btn-voir-plus {
+            background: #0A0A0A;
+        }
+
+        /* Section Avis */
+        .avis-section {
+            padding: 80px 0;
+            background-color: #1a365d;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            overflow: hidden;
+        }
+
+        .avis-section .section-title {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .avis-stars {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .avis-stars svg {
+            color: #C9A84C;
+            fill: #C9A84C;
+            margin: 0 3px;
+        }
+
+        .avis-carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .avis-track {
+            display: flex;
+            gap: 30px;
+            animation: scroll-avis 30s linear infinite;
+        }
+
+
+        @keyframes scroll-avis {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .avis-item {
+            flex-shrink: 0;
+            width: 350px;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .avis-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Section contact */
+        .contact-section {
+            background: #fff;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        /* Footer ajustement */
+        .footer-experience {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #C9A84C;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-slider-container {
+                width: 100%;
+            }
+
+            .hero-slide {
+                height: 280px;
+            }
+
+            .prestations-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .avis-item {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                top: 30px !important;
+            }
+
+            .hero-section {
+                padding: 80px 0 60px;
+                margin-top: 100px;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .hero-slide {
+                height: 220px;
+            }
+
+            .prestations-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .prestation-card-image {
+                height: 180px;
+            }
+
+            .gold-banner {
+                font-size: 0.95rem;
+                padding: 15px;
+            }
+
+            .avis-item {
+                width: 280px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <span>Depuis 2005</span> • Plus de 150 chantiers réalisés
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="IBTimus Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="logo-text" style="display: none;">IBTIMUS</span>
+            </a>
+            <div class="header-right">
+                <a href="tel:0139892380" class="phone-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    <span>01 39 89 23 80</span>
+                </a>
+                <a href="#contact" class="btn btn-primary">Prendre rendez-vous</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Sticky CTA -->
+    <div class="mobile-sticky-cta">
+        <a href="tel:0139892380" class="btn btn-primary btn-full">Appelez-nous</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Votre partenaire <span>bâtiment</span> depuis 2005</h1>
+                <p>Ravalement, isolation thermique, construction, rénovation et agencement. Une équipe de professionnels à votre service pour tous vos projets.</p>
+                <a href="#contact" class="btn btn-primary btn-large">Obtenir un devis gratuit</a>
+            </div>
+            <div class="hero-slider-container">
+                <div class="hero-slider-track" id="heroTrack">
+                    <div class="hero-slide">
+                        <img src="images_ibtimus/image_023.jpg" alt="Ravalement de façade">
+                    </div>
+                    <div class="hero-slide">
+                        <img src="images_ibtimus/image_015.jpg" alt="Construction">
+                    </div>
+                    <div class="hero-slide">
+                        <img src="images_ibtimus/image_084.jpg" alt="Rénovation">
+                    </div>
+                    <div class="hero-slide">
+                        <img src="images_ibtimus/image_074.jpg" alt="Rénovation intérieure">
+                    </div>
+                    <div class="hero-slide">
+                        <img src="images_ibtimus/image_141.jpg" alt="Toiture">
+                    </div>
+                </div>
+                <div class="hero-dots">
+                    <span class="hero-dot active" onclick="goToHeroSlide(0)"></span>
+                    <span class="hero-dot" onclick="goToHeroSlide(1)"></span>
+                    <span class="hero-dot" onclick="goToHeroSlide(2)"></span>
+                    <span class="hero-dot" onclick="goToHeroSlide(3)"></span>
+                    <span class="hero-dot" onclick="goToHeroSlide(4)"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bandeau doré -->
+    <div class="gold-banner">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        Plus de 150 chantiers réalisés depuis 2005
+    </div>
+
+    <!-- Prestations Section -->
+    <section class="prestations" id="prestations">
+        <div class="container">
+            <h2 class="section-title">Nos Prestations</h2>
+            <p class="section-subtitle">Des solutions complètes pour tous vos projets de bâtiment</p>
+            <div class="prestations-grid">
+                <a href="pages/ravalement.html" class="prestation-card">
+                    <div class="prestation-card-image">
+                        <img src="images_ibtimus/image_024.jpg" alt="Ravalement de façade">
+                    </div>
+                    <div class="prestation-card-content">
+                        <h3>Ravalement de Façade</h3>
+                        <p>Nettoyage, réparation et embellissement de vos façades</p>
+                        <span class="btn-voir-plus">Voir nos réalisations</span>
+                    </div>
+                </a>
+                <a href="pages/ite.html" class="prestation-card">
+                    <div class="prestation-card-image">
+                        <img src="images_ibtimus/image_114.jpg" alt="Isolation thermique">
+                    </div>
+                    <div class="prestation-card-content">
+                        <h3>ITE - Isolation Thermique</h3>
+                        <p>Réduisez vos factures énergétiques et gagnez en confort</p>
+                        <span class="btn-voir-plus">Voir nos réalisations</span>
+                    </div>
+                </a>
+                <a href="pages/construction.html" class="prestation-card">
+                    <div class="prestation-card-image">
+                        <img src="images_ibtimus/image_010.jpg" alt="Construction">
+                    </div>
+                    <div class="prestation-card-content">
+                        <h3>Construction & Extension</h3>
+                        <p>Agrandissez votre espace de vie avec des travaux sur mesure</p>
+                        <span class="btn-voir-plus">Voir nos réalisations</span>
+                    </div>
+                </a>
+                <a href="pages/renovation.html" class="prestation-card">
+                    <div class="prestation-card-image">
+                        <img src="images_ibtimus/image_074.jpg" alt="Rénovation intérieure">
+                    </div>
+                    <div class="prestation-card-content">
+                        <h3>Rénovation Intérieure</h3>
+                        <p>Transformez votre intérieur selon vos envies</p>
+                        <span class="btn-voir-plus">Voir nos réalisations</span>
+                    </div>
+                </a>
+                <a href="pages/bureaux.html" class="prestation-card">
+                    <div class="prestation-card-image">
+                        <img src="images_ibtimus/image_080.jpg" alt="Agencement">
+                    </div>
+                    <div class="prestation-card-content">
+                        <h3>Agencement</h3>
+                        <p>Des espaces fonctionnels et esthétiques sur mesure</p>
+                        <span class="btn-voir-plus">Voir nos réalisations</span>
+                    </div>
+                </a>
+                <a href="pages/toiture.html" class="prestation-card">
+                    <div class="prestation-card-image">
+                        <img src="images_ibtimus/image_130.jpg" alt="Toiture">
+                    </div>
+                    <div class="prestation-card-content">
+                        <h3>Toiture & Maçonnerie</h3>
+                        <p>Protégez votre bâtiment avec des travaux durables</p>
+                        <span class="btn-voir-plus">Voir nos réalisations</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Avis -->
+    <section class="avis-section">
+        <div class="container">
+            <h2 class="section-title">Ils sont plus de 150 à nous avoir fait confiance</h2>
+            <div class="avis-stars">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+        </div>
+        <div class="avis-carousel">
+            <div class="avis-track">
+                <!-- Premier set d'avis -->
+                <div class="avis-item"><img src="avis/1.png" alt="Avis client"></div>
+                <div class="avis-item"><img src="avis/2.png" alt="Avis client"></div>
+                <div class="avis-item"><img src="avis/3.png" alt="Avis client"></div>
+                <div class="avis-item"><img src="avis/4.png" alt="Avis client"></div>
+                <div class="avis-item"><img src="avis/5.png" alt="Avis client"></div>
+                <!-- Duplication pour boucle infinie -->
+                <div class="avis-item"><img src="avis/1.png" alt="Avis client"></div>
+                <div class="avis-item"><img src="avis/2.png" alt="Avis client"></div>
+                <div class="avis-item"><img src="avis/3.png" alt="Avis client"></div>
+                <div class="avis-item"><img src="avis/4.png" alt="Avis client"></div>
+                <div class="avis-item"><img src="avis/5.png" alt="Avis client"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Prenez rendez-vous pour votre devis gratuit</h2>
+            <p class="section-subtitle">Gratuit • Sans engagement • Réponse rapide</p>
+            <a href="tel:0139892380" class="btn btn-primary btn-large contact-cta">Appelez-nous : 01 39 89 23 80</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/logo.png" alt="IBTimus Logo" class="footer-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="footer-logo-text" style="display: none;">IBTIMUS</div>
+                    <div class="contact-info">
+                        <p>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            1 Bis Bd. Cotte, 95880 Enghien-les-Bains
+                        </p>
+                        <p>
+                            <a href="tel:0139892380">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                01 39 89 23 80
+                            </a>
+                        </p>
+                        <p>
+                            <a href="mailto:office@ibtimus.fr">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                office@ibtimus.fr
+                            </a>
+                        </p>
+                        <div class="footer-experience">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            Plus de 150 chantiers réalisés
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Mentions légales</h4>
+                    <a href="mentions-legales.html">Mentions légales</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens rapides</h4>
+                    <a href="pages/ravalement.html">Ravalement de Façade</a>
+                    <a href="pages/ite.html">ITE - Isolation Thermique</a>
+                    <a href="pages/construction.html">Construction & Extension</a>
+                    <a href="pages/renovation.html">Rénovation Intérieure</a>
+                    <a href="pages/bureaux.html">Agencement</a>
+                    <a href="pages/toiture.html">Toiture & Maçonnerie</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 IBTimus. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Hero slider
+        let heroCurrentSlide = 0;
+        const heroTrack = document.getElementById('heroTrack');
+        const heroDots = document.querySelectorAll('.hero-dot');
+        const heroTotalSlides = 5;
+
+        function goToHeroSlide(index) {
+            heroCurrentSlide = index;
+            heroTrack.style.transform = 'translateX(-' + (index * 100) + '%)';
+            heroDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        // Auto-slide hero toutes les 4 secondes
+        setInterval(function() {
+            const next = (heroCurrentSlide + 1) % heroTotalSlides;
+            goToHeroSlide(next);
+        }, 4000);
+    </script>
+</body>
+</html>
